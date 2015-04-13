@@ -36,6 +36,7 @@
         		</Button.Foreground>
         	</Button>
         	<TextBlock x:Name="tbl_Loading" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="400,100,0,0" Height="70" Width="244" FontSize="26.667"/>
+        	<TextBlock x:Name="tbl_success" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="400,100,0,0" Height="70" Width="244" FontSize="26.667" Visibility="Collapsed" Text="Successful"/>
 
         </Grid>
         <Grid x:Name="gr_check" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="800" Grid.RowSpan="2" Visibility="Collapsed">

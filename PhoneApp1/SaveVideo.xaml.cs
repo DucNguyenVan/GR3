@@ -28,6 +28,8 @@ namespace PhoneApp1
         {
             InitializeComponent();
             MainPage.pageName = MainPage.PageName.SavePage;
+            tbl_success.Visibility = Visibility.Collapsed;
+            tbl_Loading.Visibility = Visibility.Visible;
             mediaComposition = new MediaComposition();
           //  CheckValidateOfMediaCompotion();
             SetMediaComposition(Preview.selectedShow);
@@ -118,6 +120,8 @@ namespace PhoneApp1
             });
             await mediaComposition.RenderToFileAsync(videoStorageFile, MediaTrimmingPreference.Fast, mediaEncodingProfile).AsTask(cts.Token, progress);
            // btn_Save.Visibility = Visibility.Visible;
+            tbl_success.Visibility = Visibility.Visible;
+            tbl_Loading.Visibility = Visibility.Collapsed;
             Debug.WriteLine(videoStorageFile.Path);
             GlobalSettings.videoPropertyList[Preview.selectedShow].saveFilePath = videoStorageFile.Path;
             GlobalSettings.WriteThumbnail();
