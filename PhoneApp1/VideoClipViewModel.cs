@@ -6,7 +6,6 @@ namespace PhoneApp1
 {
     public class VideoClip
     {
-        private int test4;
         public MediaClip Clip { get; set; }
         public BitmapImage Thumbnail { get; set; }
         public string Caption { get; set; }
