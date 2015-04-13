@@ -1,0 +1,55 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="PhoneApp1.Frame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="Add Frame" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        	<Grid HorizontalAlignment="Left" Height="183" VerticalAlignment="Top" Width="398" Margin="32,96,0,0">
+        		<Grid.Background>
+        			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        				<GradientStop Color="#FF0E0D0B" Offset="1"/>
+        				<GradientStop Color="#FFA89C9C" Offset="0.974"/>
+        			</LinearGradientBrush>
+        		</Grid.Background>
+        	</Grid>
+        	<TextBox x:Name="tb_TextOfFrame" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" Text="Enter text here" VerticalAlignment="Top" Width="456" Background="#BFFFFFFF"/>
+        	<Button x:Name="btn_OK" Content="View" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="537,239,0,0" Click="btn_OK_Click" Width="100" Height="80"/>
+        	<TextBlock x:Name="tbl_text" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="69,148,0,0" Width="331" Height="103" TextAlignment="Center" FontSize="24"/>
+        	<Button x:Name="btn_Back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="664,239,0,0" Width="80" Height="80" Click="btn_Back_Click">
+        		<Button.Foreground>
+        			<ImageBrush Stretch="Fill"/>
+        		</Button.Foreground>
+        		<Button.Background>
+        			<ImageBrush Stretch="Fill" ImageSource="/Assets/Save.png"/>
+        		</Button.Background>
+        	</Button>
+        	<TextBox x:Name="tbl_time" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="124" Margin="609,0,0,0" TextAlignment="Center"/>
+        	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Time(s)" VerticalAlignment="Top" Margin="513,15,0,0" Width="91" Height="62" FontSize="26.667"/>
+
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
