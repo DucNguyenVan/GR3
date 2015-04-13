@@ -176,16 +176,13 @@
   <ItemGroup>
     <Content Include="Assets\Add-New.png" />
     <Content Include="Assets\AlignmentGrid.png" />
-    <Content Include="Assets\ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Assets\ApplicationIcon.png" />
     <Content Include="Assets\Back.png" />
     <Content Include="Assets\BackPage.png" />
     <Content Include="Assets\BadgeLogo.png" />
     <Content Include="Assets\first.png" />
     <Content Include="Assets\Frame.png" />
     <Content Include="Assets\last.png" />
-    <Content Include="Assets\Movie edit.png" />
     <Content Include="Assets\Music.png" />
     <Content Include="Assets\News-Add.png" />
     <Content Include="Assets\Next.png" />

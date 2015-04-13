@@ -54,7 +54,7 @@
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/BackPage.png"/>
 			</Button.Background>
 		</Button>
-		<Grid x:Name="gr_upload" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="800" Grid.RowSpan="2" Visibility="Collapsed">
+		<Grid x:Name="gr_upload" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="800" Grid.RowSpan="2">
 			<Grid.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="Black" Offset="0"/>
@@ -67,7 +67,7 @@
 				</Button.Background>
 			</Button>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Upload Video" VerticalAlignment="Top" Margin="27,10,0,0" Width="489" Height="101" FontSize="72"/>
-			<TextBlock x:Name="tbl_loadingPercent" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="234,138,0,0" Width="336" Height="100" FontSize="32" TextAlignment="Right"/>
+			<TextBlock x:Name="tbl_loadingPercent" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="234,138,0,0" Width="336" Height="100" FontSize="32" TextAlignment="Center"/>
 			<TextBlock x:Name="tbl_percent" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="240,260,0,0" Width="165" Height="100" FontSize="32" TextAlignment="Right"/>
 			<TextBlock x:Name="tbl_total" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="405,260,0,0" Height="100" Width="165" FontSize="32"/>
 		</Grid>

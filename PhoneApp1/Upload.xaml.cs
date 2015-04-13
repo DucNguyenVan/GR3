@@ -32,16 +32,12 @@ namespace PhoneApp1
             MainPage.pageName = MainPage.PageName.UploadPage;
             gr_upload.Visibility = Visibility.Collapsed;
             gr_checkSaveFile.Visibility = Visibility.Collapsed;
-            uploadFile = SaveVideo.videoStorageFile;
+            //uploadFile = SaveVideo.videoStorageFile;
             
-            //if (SaveVideo.videoStorageFile == null)
+            //if (uploadFile == null)
             //{
             //    gr_checkSaveFile.Visibility = Visibility.Visible;
             //}
-            if (uploadFile == null)
-            {
-                gr_checkSaveFile.Visibility = Visibility.Visible;
-            }
             List<string> source = CreateSource();
             ListBox1.ItemsSource = source;
          //   lper_category.ItemsSource = source;
@@ -156,13 +152,15 @@ namespace PhoneApp1
          //   var uploadFile = SaveVideo.videoStorageFile;
 //            uploadFile = Preview.filePreview;
             //using (var fileStream = new FileStream(uploadFile.Path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-            Debug.WriteLine(GlobalSettings.saveFileList[Preview.selectedShow]);
-            using (var fileStream = new FileStream(GlobalSettings.saveFileList[Preview.selectedShow], FileMode.Open,FileAccess.ReadWrite,FileShare.ReadWrite))
+            StorageFile file = await StorageFile.GetFileFromPathAsync(GlobalSettings.videoPropertyList[Preview.selectedShow].saveFilePath);
+            Debug.WriteLine("preview selected:"+Preview.selectedShow);
+            Debug.WriteLine("save path" + GlobalSettings.videoPropertyList[Preview.selectedShow].saveFilePath);
+            using (var fileStream = new FileStream(file.Path, FileMode.Open,FileAccess.ReadWrite,FileShare.ReadWrite))
             {
                 tbl_loadingPercent.Visibility = Visibility.Visible;
                 tbl_loadingPercent.Text = "Uploading";
                 //get lenght of video file to calculate percent
-                Stream stream = (await uploadFile.OpenReadAsync()).AsStreamForRead();
+                Stream stream = (await file.OpenReadAsync()).AsStreamForRead();
                 tbl_percent.Text = text;
                 lenght = stream.Length/1024;
                 var videosInsertRequest = youtubeService.Videos.Insert(video, "snippet,status", fileStream, "video/mp4");
