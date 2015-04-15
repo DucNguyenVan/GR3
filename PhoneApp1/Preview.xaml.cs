@@ -29,6 +29,7 @@ namespace PhoneApp1
         public static int selectedShow = 0;
         string fileName;
         private int selectIndex;
+        bool isStream;
         public static List<Image> previewImageList = new List<Image>();
         public Preview()
         {
@@ -40,6 +41,15 @@ namespace PhoneApp1
             gr_VideoList.Visibility = Visibility.Collapsed;
             ListBox1.ItemsSource = null;
             GenerateFileV3();
+         //   GenerateVideoForPreview();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            sliderStream.Visibility = Visibility.Collapsed;
+            btn_save.Visibility = Visibility.Collapsed;
+            btn_share.Visibility = Visibility.Collapsed;
+            gr_VideoList.Visibility = Visibility.Collapsed;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -65,8 +75,18 @@ namespace PhoneApp1
 
         private void OnMediaOpened(object sender, RoutedEventArgs e)
         {
-
+            if (GlobalSettings.videoPropertyList[selectedShow].saveFilePath == "")
+            {
+                btn_save.Visibility = Visibility.Visible;
+                btn_share.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                btn_save.Visibility = Visibility.Collapsed;
+                btn_share.Visibility = Visibility.Visible;
+            }
             Debug.WriteLine("stream");
+            isStream = true;
             // Reinit pos slider
             sliderStream.Minimum = 0;
             sliderStream.Maximum = MainPage.mediaComposition.Duration.TotalSeconds;
@@ -124,7 +144,7 @@ namespace PhoneApp1
 
         private void GenerateVideoForPreview()
         {
-            MainPage.mediaComposition.GeneratePreviewMediaStreamSource((int)media_preview.ActualWidth, (int)media_preview.ActualHeight);
+           // media_preview.SetSource( MainPage.mediaComposition.GeneratePreviewMediaStreamSource((int)media_preview.ActualWidth, (int)media_preview.ActualHeight));
         }
 
         private async void GenerateFileV3()
@@ -148,15 +168,20 @@ namespace PhoneApp1
                 await MainPage.mediaComposition.RenderToFileAsync(sampleFile, MediaTrimmingPreference.Fast, mediaEncodingProfile).AsTask(cts.Token, progress);
                 fileName = sampleFile.Name;
                 Debug.WriteLine(sampleFile.Name);
-                GlobalSettings.isNewShow = false;
-                GlobalSettings.AddFileNameToList(sampleFile.Name);
-                GlobalSettings.WriteState();
-                AddThumbnailToPreviewVideo(MainPage.imageList[0]);
+                //GlobalSettings.isNewShow = false;
+                //GlobalSettings.AddFileNameToList(sampleFile.Name);
+                //GlobalSettings.WriteState();
+                //AddThumbnailToPreviewVideo(MainPage.imageList[0]);
 
                 btn_show.Visibility = Visibility.Visible;
                 filePreview = sampleFile;
                 VideoPlayback();
+                GlobalSettings.isNewShow = false;
+                GlobalSettings.AddFileNameToList(sampleFile.Name);
+                GlobalSettings.WriteState();
+                AddThumbnailToPreviewVideo(MainPage.imageList[0]);
             }
+
             // ShowSourceOfListBox();
             ShowUI();
         }
@@ -287,16 +312,16 @@ namespace PhoneApp1
                 Debug.WriteLine(GlobalSettings.fileNameStore[selectIndex]);
                 SetFileToPreView(GlobalSettings.fileNameStore[selectIndex]);
                 Preview.selectedShow = selectIndex;
-                if (GlobalSettings.videoPropertyList[selectedShow].saveFilePath == "")
-                {
-                    btn_save.Visibility = Visibility.Visible;
-                    btn_share.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    btn_save.Visibility = Visibility.Collapsed;
-                    btn_share.Visibility = Visibility.Visible;
-                }
+                //if (GlobalSettings.videoPropertyList[selectedShow].saveFilePath == "")
+                //{
+                //    btn_save.Visibility = Visibility.Visible;
+                //    btn_share.Visibility = Visibility.Collapsed;
+                //}
+                //else
+                //{
+                //    btn_save.Visibility = Visibility.Collapsed;
+                //    btn_share.Visibility = Visibility.Visible;
+                //}
             }
 
         }

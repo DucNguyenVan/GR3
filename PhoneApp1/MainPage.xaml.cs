@@ -80,6 +80,7 @@ namespace PhoneApp1
         {
             InitializeComponent();
             this.InitializeComponent();
+            gr_swap.Visibility = Visibility.Collapsed;
             GlobalSettings.ReadState();
             //read da bao gom ca addToList
             GlobalSettings.ReadThumbnail();
@@ -176,7 +177,10 @@ namespace PhoneApp1
                     //image.SetSource(thumbnail);
                     image.SetSource(stream);
                     Thickness margin = img.Margin;
-                    margin.Left = 13;
+                    margin.Left = 4;
+                    margin.Right = 4;
+                    margin.Top = 4;
+                    margin.Bottom = 4;
                     img.Margin = margin;
                     img.Source = image;
                     // stackPanelContainer.Children.Add(img);
@@ -236,6 +240,7 @@ namespace PhoneApp1
             if (lbi.SelectedIndex >= 0)
                 currentSelectedIndex = lbi.SelectedIndex;
             //textBlock1.Text = "   You selected " + lbi.Content.ToString() + ".";
+            ShowNavigationBar(true);
         }
 
         private void SwapVideo(int x, int y)
@@ -302,6 +307,18 @@ namespace PhoneApp1
             }
         }
 
+        private void ShowNavigationBar(bool isShow)
+        {
+            if (isShow)
+            {
+                gr_swap.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                gr_swap.Visibility = Visibility.Collapsed;
+            }
+        }
+
         private void btn_preview_Click(object sender, RoutedEventArgs e)
         {
             //tai 1 life circle, chi 1 listbox duoc add 1 item duy nhat. Neu listbox khac cung muon add item do vao,thi se gay ra loi.
@@ -318,24 +335,29 @@ namespace PhoneApp1
         {
             if (currentSelectedIndex <= 0) return;
             SwapVideo(currentSelectedIndex, --currentSelectedIndex);
+            ListBox1.SelectedIndex = currentSelectedIndex;
+
         }
 
         private void btn_next_Click(object sender, RoutedEventArgs e)
         {
             if (currentSelectedIndex >= imageList.Count - 1) return;
             SwapVideo(currentSelectedIndex, ++currentSelectedIndex);
+            ListBox1.SelectedIndex = currentSelectedIndex;
         }
 
         private void btn_first_Click(object sender, RoutedEventArgs e)
         {
             SwapVideo(currentSelectedIndex, 0);
             currentSelectedIndex = 0;
+            ListBox1.SelectedIndex = currentSelectedIndex;
         }
 
         private void btn_last_Click(object sender, RoutedEventArgs e)
         {
             SwapVideo(currentSelectedIndex, imageList.Count - 1);
             currentSelectedIndex = imageList.Count - 1;
+            ListBox1.SelectedIndex = currentSelectedIndex;
         }
 
         private void btn_newVideo_Click(object sender, RoutedEventArgs e)
