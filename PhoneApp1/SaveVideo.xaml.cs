@@ -105,8 +105,8 @@ namespace PhoneApp1
             btn_Save.Visibility = Visibility.Collapsed;
             videoStorageFile = await KnownFolders.VideosLibrary.CreateFileAsync("editedVideo.mp4", CreationCollisionOption.GenerateUniqueName);
             var mediaEncodingProfile = SelectProfile(selectIndex);
-            if (GlobalSettings.isRemove)
-                DisableCurrentMusic();
+            //if (GlobalSettings.isRemove)
+            //    DisableCurrentMusic();
 
             //old
             // await mediaComposition.RenderToFileAsync(videoStorageFile, MediaTrimmingPreference.Fast, mediaEncodingProfile);
@@ -122,7 +122,6 @@ namespace PhoneApp1
            // btn_Save.Visibility = Visibility.Visible;
             tbl_success.Visibility = Visibility.Visible;
             tbl_Loading.Visibility = Visibility.Collapsed;
-            Debug.WriteLine(videoStorageFile.Path);
             GlobalSettings.videoPropertyList[Preview.selectedShow].saveFilePath = videoStorageFile.Path;
             GlobalSettings.WriteThumbnail();
             GlobalSettings.isSaved = true;

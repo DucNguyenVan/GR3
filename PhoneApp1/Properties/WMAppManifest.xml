@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2014/deployment" AppPlatformVersion="8.1">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{92d992f1-69a7-4135-830e-38013c79f62e}" Title="XMovie" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PhoneApp1 author" Description="Sample description" SDOptOut="false" BackUpOptOut="false" Publisher="PhoneApp1" PublisherID="{19372100-cf7a-4ac2-a979-d27c8f48b91b}">
+  <App xmlns="" ProductID="{92d992f1-69a7-4135-830e-38013c79f62e}" Title="FMovie" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PhoneApp1 author" Description="Sample description" SDOptOut="false" BackUpOptOut="false" Publisher="PhoneApp1" PublisherID="{19372100-cf7a-4ac2-a979-d27c8f48b91b}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

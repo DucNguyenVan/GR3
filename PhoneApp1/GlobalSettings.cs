@@ -133,7 +133,6 @@ namespace PhoneApp1
                 foreach (Composition composition in compositionList)
                 {
                     //writer.WriteLine(name);
-                    Debug.WriteLine("number of clips:" + composition.lenght);
                     writer.Write(composition.id.ToString());
                     writer.Write("," + composition.lenght.ToString());
                     foreach (ClipFileType clipName in composition.clipNameList)
@@ -170,15 +169,10 @@ namespace PhoneApp1
                         comp.id = int.Parse(content[0]);
                         comp.lenght = int.Parse(content[1]);
                         int realLenght = comp.lenght * 2; //vi truoc moi ten file lai co 1 time, nen phai duplicate
-                        Debug.WriteLine("clips number" + comp.lenght);
                         for (int i = 2; i <= realLenght; i+=2) //bonus +2 vi i bat dau tu 2
                         {
                             //neu chi video thi doc dung time, nhung co image thi sai time
                             //solved: dinh menh, ten file co ky tu "-" nen hieu nham luc doc file
-                            Debug.WriteLine("noi");
-                            Debug.WriteLine("i"+i+":"+content[i]);
-                            Debug.WriteLine("Dung");
-                            Debug.WriteLine(content[i+1]);
                             ClipFileType tempClip = new ClipFileType();
                             tempClip.time = int.Parse(content[i]);
                             tempClip.clipPath = content[i+1];

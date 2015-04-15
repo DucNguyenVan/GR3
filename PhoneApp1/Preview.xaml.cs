@@ -154,6 +154,9 @@ namespace PhoneApp1
 
             if (GlobalSettings.isNewShow && MainPage.mediaComposition.Clips.Count != 0)
             {
+                if (GlobalSettings.isRemove)
+                    DisableCurrentMusic();
+
                 btn_show.Visibility = Visibility.Collapsed;
                 int name = GlobalSettings.fileNameStore.Count + 1;
                 Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -184,6 +187,14 @@ namespace PhoneApp1
 
             // ShowSourceOfListBox();
             ShowUI();
+        }
+
+        private void DisableCurrentMusic()
+        {
+            foreach (MediaClip clip in MainPage.mediaComposition.Clips)
+            {
+                clip.Volume = 0;
+            }
         }
 
         private void btn_back_Click(object sender, RoutedEventArgs e)

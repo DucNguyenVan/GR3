@@ -39,6 +39,7 @@ namespace PhoneApp1
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        const int TIME_PER_IMAGE = 3;
         MediaClip clip;
         DispatcherTimer posTimer;
         public static MediaComposition mediaComposition;
@@ -69,7 +70,7 @@ namespace PhoneApp1
         public static List<MyVideo> videoList = new List<MyVideo>();
         private VideoState currentState;
         public static PageName pageName;
-        private IEnumerable<string> supportedFileTypes = new List<string> { ".mp4" };
+        private IEnumerable<string> supportedFileTypes = new List<string> { ".mp4",".jpg" };
         private IEnumerable<string> supportedMusicFileTypes = new List<string> { ".mp3" };
         private readonly VideoClips videoClips;
         public static List<Image> imageList = new List<Image>();
@@ -85,7 +86,6 @@ namespace PhoneApp1
             //read da bao gom ca addToList
             GlobalSettings.ReadThumbnail();
             GlobalSettings.ReadClipName();
-            Debug.WriteLine(pageName);
             //  this.NavigationCacheMode = NavigationCacheMode.Required;
             var app = Application.Current as App;
             videoStream = new System.IO.MemoryStream();
@@ -164,36 +164,125 @@ namespace PhoneApp1
                 foreach (StorageFile file in args.Files)
                 {
                     fileUpload = file;
-                    Debug.WriteLine(fileUpload.Path);
-                    clip = await MediaClip.CreateFromFileAsync(fileUpload);
-                    sourceFile = fileUpload;
-                    mediaComposition.Clips.Add(clip);
-                    // Create thumbnail
-                    var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView);
-                    Stream stream = thumbnail.AsStream();
-                    var image = new BitmapImage();
-                    Image img = new Image();
-                    img.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                    //image.SetSource(thumbnail);
-                    image.SetSource(stream);
-                    Thickness margin = img.Margin;
-                    margin.Left = 4;
-                    margin.Right = 4;
-                    margin.Top = 4;
-                    margin.Bottom = 4;
-                    img.Margin = margin;
-                    img.Source = image;
-                    // stackPanelContainer.Children.Add(img);
+                   // ProcessFile(file);
+                    if (file.FileType != ".mp4")
+                    {
+                       // ProcessFileAsImage(file);
+                        clip = await MediaClip.CreateFromImageFileAsync(file, TimeSpan.FromSeconds(TIME_PER_IMAGE));
+                        mediaComposition.Clips.Add(clip);
+                        // Create thumbnail
+                        var bitmap = new BitmapImage();
+                        Image img = new Image();
+                        bitmap.UriSource = new Uri(file.Path);
+                        img.Source = bitmap;
+                        AddMoreImageToList(img);
+                        AddVideoToList(file, img, true, TIME_PER_IMAGE);
+                    }
+                    else
+                    {
+                     //   ProcessFileAsVideo(file);
+                        clip = await MediaClip.CreateFromFileAsync(file);
+                        mediaComposition.Clips.Add(clip);
+                        // Create thumbnail
+                        var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView);
+                        Stream stream = thumbnail.AsStream();
+                        var image = new BitmapImage();
+                        Image img = new Image();
+                        img.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                        //image.SetSource(thumbnail);
+                        image.SetSource(stream);
+                        Thickness margin = img.Margin;
+                        margin.Left = 4;
+                        margin.Right = 4;
+                        margin.Top = 4;
+                        margin.Bottom = 4;
+                        img.Margin = margin;
+                        img.Source = image;
+                        // Add to our viewmodel
+                        videoClips.Add(new VideoClip(clip, image, file.Name));
+                        AddMoreFileToList(file);
+                        AddMoreImageToList(img);
+                        AddVideoToList(file, img);
+                    }
+                    //Debug.WriteLine(fileUpload.Path);
+                    //clip = await MediaClip.CreateFromFileAsync(fileUpload);
+                    //mediaComposition.Clips.Add(clip);
+                    //// Create thumbnail
+                    //var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView);
+                    //Stream stream = thumbnail.AsStream();
+                    //var image = new BitmapImage();
+                    //Image img = new Image();
+                    //img.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    ////image.SetSource(thumbnail);
+                    //image.SetSource(stream);
+                    //Thickness margin = img.Margin;
+                    //margin.Left = 4;
+                    //margin.Right = 4;
+                    //margin.Top = 4;
+                    //margin.Bottom = 4;
+                    //img.Margin = margin;
+                    //img.Source = image;
+                    //// stackPanelContainer.Children.Add(img);
 
-                    // Add to our viewmodel
-                    videoClips.Add(new VideoClip(clip, image, file.Name));
-                    AddMoreFileToList(file);
-                    AddMoreImageToList(img);
-                    AddVideoToList(file, img);
+                    //// Add to our viewmodel
+                    //videoClips.Add(new VideoClip(clip, image, file.Name));
+                    //AddMoreFileToList(file);
+                    //AddMoreImageToList(img);
+                    //AddVideoToList(file, img);
                 }
                 ListBox1.ItemsSource = null;
                 ListBox1.ItemsSource = imageList;
+                Debug.WriteLine("show item listbox");
             }
+        }
+
+        private void ProcessFile(StorageFile file)
+        {
+            if (file.FileType != ".mp4")
+            {
+                ProcessFileAsImage(file);
+            }
+            else
+                ProcessFileAsVideo(file);
+        }
+
+        private async void ProcessFileAsVideo(StorageFile file)
+        {
+            clip = await MediaClip.CreateFromFileAsync(file);
+            mediaComposition.Clips.Add(clip);
+            // Create thumbnail
+            var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView);
+            Stream stream = thumbnail.AsStream();
+            var image = new BitmapImage();
+            Image img = new Image();
+            img.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            //image.SetSource(thumbnail);
+            image.SetSource(stream);
+            Thickness margin = img.Margin;
+            margin.Left = 4;
+            margin.Right = 4;
+            margin.Top = 4;
+            margin.Bottom = 4;
+            img.Margin = margin;
+            img.Source = image;
+            // Add to our viewmodel
+            videoClips.Add(new VideoClip(clip, image, file.Name));
+            AddMoreFileToList(file);
+            AddMoreImageToList(img);
+            AddVideoToList(file, img);
+        }
+
+        private async void ProcessFileAsImage(StorageFile file)
+        {
+            clip = await MediaClip.CreateFromImageFileAsync(file,TimeSpan.FromSeconds(TIME_PER_IMAGE));
+            mediaComposition.Clips.Add(clip);
+            // Create thumbnail
+            var bitmap = new BitmapImage();
+            Image img = new Image();
+            bitmap.UriSource = new Uri(file.Path);
+            img.Source = bitmap;
+            AddMoreImageToList(img);
+            AddVideoToList(file, img,true,TIME_PER_IMAGE);
         }
 
         private void btn_Upload_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -236,7 +325,6 @@ namespace PhoneApp1
         {
             // ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
             var lbi = sender as ListBox;
-            Debug.WriteLine("index selected:" + lbi.SelectedIndex);
             if (lbi.SelectedIndex >= 0)
                 currentSelectedIndex = lbi.SelectedIndex;
             //textBlock1.Text = "   You selected " + lbi.Content.ToString() + ".";
