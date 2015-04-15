@@ -35,7 +35,7 @@
         </ListBox>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Video description" VerticalAlignment="Top" Margin="10,184,0,0" Width="210" Height="38"/>
 		<TextBox x:Name="tbx_description" HorizontalAlignment="Left" Height="231" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Margin="0,227,0,0"/>
-		<Button x:Name="btn_upload" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="540,382,0,0" Click="btn_upload_Click" Width="80" Height="80">
+		<Button x:Name="btn_upload" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="540,382,0,0" Click="btn_upload_Click" Width="80" Height="80" BorderThickness="0">
 			<Button.Background>
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/Upload.png"/>
 			</Button.Background>
@@ -51,7 +51,7 @@
 		</Grid>
 		<Button x:Name="btn_back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="670,382,0,0" Click="btn_back_Click" Width="80" Height="80">
 			<Button.Background>
-				<ImageBrush Stretch="Fill" ImageSource="/Assets/BackPage.png"/>
+				<ImageBrush Stretch="Fill" ImageSource="/Assets/Command-Undo.png"/>
 			</Button.Background>
 		</Button>
 		<Grid x:Name="gr_upload" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="800" Grid.RowSpan="2">
@@ -61,9 +61,9 @@
 					<GradientStop Color="Black" Offset="1"/>
 				</LinearGradientBrush>
 			</Grid.Background>
-			<Button x:Name="btn_Done" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="640,378,0,0" Click="btn_Done_Click" Width="80" Height="80">
+			<Button x:Name="btn_Done" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="640,378,0,0" Click="btn_Done_Click" Width="80" Height="80" BorderThickness="0">
 				<Button.Background>
-					<ImageBrush Stretch="Fill" ImageSource="/Assets/BackPage.png"/>
+					<ImageBrush Stretch="Fill" ImageSource="/Assets/Command-Undo.png"/>
 				</Button.Background>
 			</Button>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Upload Video" VerticalAlignment="Top" Margin="27,10,0,0" Width="489" Height="101" FontSize="72"/>

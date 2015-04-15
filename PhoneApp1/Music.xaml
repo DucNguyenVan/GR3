@@ -24,9 +24,9 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-        	<Button x:Name="btn_addMusic" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="100" Margin="29,236,0,0" Click="btn_addMusic_Click">
+        	<Button x:Name="btn_addMusic" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="100" Margin="29,236,0,0" Click="btn_addMusic_Click" BorderThickness="0">
         		<Button.Background>
-        			<ImageBrush Stretch="Fill" ImageSource="/Assets/Add-New.png"/>
+        			<ImageBrush Stretch="Fill" ImageSource="/Assets/Addition .png"/>
         		</Button.Background>
         	</Button>
             <CheckBox x:Name="chk_removeMusic" Content="Remove current music of videos" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
@@ -41,9 +41,9 @@
         	</Grid.Background>
         	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please select video files" VerticalAlignment="Top" Margin="232,200,0,0" Width="348" Height="130" FontSize="32"/>
         </Grid>
-        <Button x:Name="btn_Done" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="646,236,0,0" Width="100" Height="100" Click="btn_Done_Click" Grid.Row="1">
+        <Button x:Name="btn_Done" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="646,236,0,0" Width="100" Height="100" Click="btn_Done_Click" Grid.Row="1" BorderThickness="0">
         	<Button.Background>
-        		<ImageBrush Stretch="Fill" ImageSource="/Assets/BackPage.png"/>
+        		<ImageBrush Stretch="Fill" ImageSource="/Assets/Command-Undo.png"/>
         	</Button.Background>
         </Button>
         <StackPanel Grid.Row="0" Margin="12,17,0,28">

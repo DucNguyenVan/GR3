@@ -36,9 +36,13 @@
         		</Grid.Background>
         	</Grid>
         	<TextBox x:Name="tb_TextOfFrame" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" Text="Enter text here" VerticalAlignment="Top" Width="456" Background="#BFFFFFFF"/>
-        	<Button x:Name="btn_OK" Content="View" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="537,239,0,0" Click="btn_OK_Click" Width="100" Height="80"/>
+        	<Button x:Name="btn_OK" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="537,239,0,0" Click="btn_OK_Click" Width="100" Height="80" BorderThickness="0">
+        		<Button.Background>
+        			<ImageBrush Stretch="Fill" ImageSource="/Assets/View-Reset.png"/>
+        		</Button.Background>
+        	</Button>
         	<TextBlock x:Name="tbl_text" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="69,148,0,0" Width="331" Height="103" TextAlignment="Center" FontSize="24"/>
-        	<Button x:Name="btn_Back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="664,239,0,0" Width="80" Height="80" Click="btn_Back_Click">
+        	<Button x:Name="btn_Back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="664,239,0,0" Width="80" Height="80" Click="btn_Back_Click" BorderThickness="0">
         		<Button.Foreground>
         			<ImageBrush Stretch="Fill"/>
         		</Button.Foreground>

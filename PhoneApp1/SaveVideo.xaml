@@ -27,7 +27,7 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
         	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Select quality of video" VerticalAlignment="Top" Width="336" Margin="30,31,0,0" Height="61" FontSize="32"/>
         	<toolkit:ListPicker x:Name="lper_quality" HorizontalAlignment="Left" Margin="30,92,0,0" VerticalAlignment="Top" Width="133" SelectionChanged="Picker"/>
-        	<Button x:Name="btn_Save" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="524,217,0,0" Width="100" Click="btn_Save_Click_1" Height="100">
+        	<Button x:Name="btn_Save" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="524,217,0,0" Width="100" Click="btn_Save_Click_1" Height="100" BorderThickness="0">
         		<Button.Background>
         			<ImageBrush Stretch="Fill" ImageSource="/Assets/Save.png"/>
         		</Button.Background>
@@ -48,9 +48,9 @@
         	</Grid.Background>
         	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please select video files" VerticalAlignment="Top" Margin="230,192,0,0" Width="362" Height="120" FontSize="32"/>
         </Grid>
-        <Button x:Name="btn_Done" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="661,218,0,0" Width="100" Height="100" Click="btn_Done_Click" Grid.Row="1">
+        <Button x:Name="btn_Done" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="661,218,0,0" Width="100" Height="100" Click="btn_Done_Click" Grid.Row="1" BorderThickness="0">
         	<Button.Background>
-        		<ImageBrush Stretch="Fill" ImageSource="/Assets/BackPage.png"/>
+        		<ImageBrush Stretch="Fill" ImageSource="/Assets/Command-Undo.png"/>
         	</Button.Background>
         </Button>
         <StackPanel Grid.Row="0" Margin="12,17,0,28">

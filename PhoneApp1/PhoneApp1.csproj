@@ -174,22 +174,25 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Add-New.png" />
+    <Content Include="Assets\Addition .png" />
+    <Content Include="Assets\addMusic.png" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png" />
-    <Content Include="Assets\Back.png" />
-    <Content Include="Assets\BackPage.png" />
     <Content Include="Assets\BadgeLogo.png" />
-    <Content Include="Assets\first.png" />
-    <Content Include="Assets\Frame.png" />
-    <Content Include="Assets\last.png" />
-    <Content Include="Assets\Music.png" />
+    <Content Include="Assets\Command-Undo.png" />
+    <Content Include="Assets\Film Role.png" />
+    <Content Include="Assets\Format-Bullets-02.png" />
+    <Content Include="Assets\Media Previous.png" />
+    <Content Include="Assets\Media Rewind.png" />
+    <Content Include="Assets\Media-Fast-Backward.png" />
+    <Content Include="Assets\Media-Fast-Forward.png" />
+    <Content Include="Assets\Movie Add.png" />
     <Content Include="Assets\News-Add.png" />
-    <Content Include="Assets\Next.png" />
-    <Content Include="Assets\Preview.png" />
+    <Content Include="Assets\Picture-Frame.png" />
     <Content Include="Assets\Save.png" />
     <Content Include="Assets\share.png" />
     <Content Include="Assets\Upload.png" />
+    <Content Include="Assets\View-Reset.png" />
     <Content Include="Assets\youtube.png" />
     <Content Include="Assets\YouTube1.png" />
     <Content Include="Movie edit.png" />

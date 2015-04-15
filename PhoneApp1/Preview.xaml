@@ -54,9 +54,9 @@
         	</Grid.Background>
         	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please select video files" VerticalAlignment="Top" Margin="226,186,0,0" Height="78" Width="358" TextAlignment="Center" FontSize="32"/>
         </Grid>
-        <Button x:Name="btn_back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="687,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_back_Click">
+        <Button x:Name="btn_back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="687,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_back_Click" BorderThickness="0">
         	<Button.Background>
-        		<ImageBrush Stretch="Fill" ImageSource="/Assets/BackPage.png"/>
+        		<ImageBrush Stretch="Fill" ImageSource="/Assets/Command-Undo.png"/>
         	</Button.Background>
         </Button>
         <StackPanel Grid.Row="1" Margin="2,0,10,348">
@@ -83,14 +83,14 @@
         		<ImageBrush Stretch="Fill" ImageSource="/Assets/Save.png"/>
         	</Button.Background>
         </Button>
-        <Button x:Name="btn_show" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="720,10,0,0" Grid.Row="1" Width="80" Height="75" Click="btn_show_Click">
+        <Button x:Name="btn_show" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="720,10,0,0" Grid.Row="1" Width="80" Height="75" Click="btn_show_Click" BorderThickness="0">
         	<Button.Background>
-        		<ImageBrush ImageSource="/Assets/first.png" Stretch="Fill"/>
+        		<ImageBrush ImageSource="/Assets/Format-Bullets-02.png" Stretch="Fill"/>
         	</Button.Background>
         </Button>
-        <Button x:Name="btn_share" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="600,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_share_Click">
+        <Button x:Name="btn_share" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="600,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_share_Click" BorderThickness="0">
         	<Button.Background>
-        		<ImageBrush Stretch="Fill" ImageSource="/Assets/YouTube1.png"/>
+        		<ImageBrush Stretch="Fill" ImageSource="/Assets/youtube.png"/>
         	</Button.Background>
         </Button>
     </Grid>
