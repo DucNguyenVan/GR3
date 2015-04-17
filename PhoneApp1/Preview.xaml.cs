@@ -38,8 +38,6 @@ namespace PhoneApp1
             sliderStream.Visibility = Visibility.Collapsed;
             btn_save.Visibility = Visibility.Collapsed;
             btn_share.Visibility = Visibility.Collapsed;
-            gr_VideoList.Visibility = Visibility.Collapsed;
-            ListBox1.ItemsSource = null;
             GenerateFileV3();
          //   GenerateVideoForPreview();
         }
@@ -49,13 +47,11 @@ namespace PhoneApp1
             sliderStream.Visibility = Visibility.Collapsed;
             btn_save.Visibility = Visibility.Collapsed;
             btn_share.Visibility = Visibility.Collapsed;
-            gr_VideoList.Visibility = Visibility.Collapsed;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             //khi back lai mainpage can phai giai phong ListBox1
-            ListBox1.ItemsSource = null;
         }
 
         private void SetSliderSize()
@@ -75,17 +71,7 @@ namespace PhoneApp1
 
         private void OnMediaOpened(object sender, RoutedEventArgs e)
         {
-            if (GlobalSettings.videoPropertyList[selectedShow].saveFilePath == "")
-            {
-                btn_save.Visibility = Visibility.Visible;
-                btn_share.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                btn_save.Visibility = Visibility.Collapsed;
-                btn_share.Visibility = Visibility.Visible;
-            }
-            Debug.WriteLine("stream");
+            ShowUI();
             isStream = true;
             // Reinit pos slider
             sliderStream.Minimum = 0;
@@ -151,16 +137,19 @@ namespace PhoneApp1
         {
             int per;
             StorageFile sampleFile = null;
-
-            if (GlobalSettings.isNewShow && MainPage.mediaComposition.Clips.Count != 0)
+            Debug.WriteLine("isnewshow" + GlobalSettings.isNewShow+" "+MainPage.mediaComposition.Clips.Count);
+            //do mediacomposition.clip o trong ham async, nen khi navigatate tu Main -> Preview thi clips van chua duoc add het
+            // nen doi khi clips.count van bang 0, mac du thuc te khac 0
+            if (GlobalSettings.isNewShow)
             {
+                Debug.WriteLine(" new render");
                 if (GlobalSettings.isRemove)
                     DisableCurrentMusic();
 
-                btn_show.Visibility = Visibility.Collapsed;
-                int name = GlobalSettings.fileNameStore.Count + 1;
+               // int name = GlobalSettings.fileNameStore.Count + 1;
+                int name = GlobalSettings.videoPropertyList.Count + 1;
                 Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                sampleFile = await localFolder.CreateFileAsync(name.ToString() + ".mp4", CreationCollisionOption.ReplaceExisting);
+                sampleFile = await localFolder.CreateFileAsync("previewVideo.mp4", CreationCollisionOption.ReplaceExisting);
                 var mediaEncodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Wvga);
                 cts = new CancellationTokenSource();
                 var progress = new Progress<double>((percent) =>
@@ -176,17 +165,48 @@ namespace PhoneApp1
                 //GlobalSettings.WriteState();
                 //AddThumbnailToPreviewVideo(MainPage.imageList[0]);
 
-                btn_show.Visibility = Visibility.Visible;
+               // btn_show.Visibility = Visibility.Visible;
                 filePreview = sampleFile;
                 VideoPlayback();
                 GlobalSettings.isNewShow = false;
-                GlobalSettings.AddFileNameToList(sampleFile.Name);
-                GlobalSettings.WriteState();
+                //GlobalSettings.AddFileNameToList(sampleFile.Name);
+                //GlobalSettings.WriteState();
                 AddThumbnailToPreviewVideo(MainPage.imageList[0]);
             }
+            else
+            {
+                Debug.WriteLine("re- render");
+                //chi render, khong luu file moi
+                if (GlobalSettings.isRemove)
+                    DisableCurrentMusic();
 
+               // int name = GlobalSettings.fileNameStore.Count + 1;
+                int name = GlobalSettings.videoPropertyList.Count + 1;
+                Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                sampleFile = await localFolder.CreateFileAsync("previewVideo.mp4", CreationCollisionOption.ReplaceExisting);
+                var mediaEncodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Wvga);
+                cts = new CancellationTokenSource();
+                var progress = new Progress<double>((percent) =>
+                {
+                    per = (int)percent;
+                    tbl_Loading.Text = "Prepairing  " + (per).ToString() + "%";
+                });
+                await MainPage.mediaComposition.RenderToFileAsync(sampleFile, MediaTrimmingPreference.Fast, mediaEncodingProfile).AsTask(cts.Token, progress);
+                fileName = sampleFile.Name;
+                Debug.WriteLine(sampleFile.Name);
+                //GlobalSettings.isNewShow = false;
+                //GlobalSettings.AddFileNameToList(sampleFile.Name);
+                //GlobalSettings.WriteState();
+                //AddThumbnailToPreviewVideo(MainPage.imageList[0]);
+
+              //  btn_show.Visibility = Visibility.Visible;
+                filePreview = sampleFile;
+                VideoPlayback();
+                //GlobalSettings.isNewShow = false;
+
+            }
             // ShowSourceOfListBox();
-            ShowUI();
+           // ShowUI();
         }
 
         private void DisableCurrentMusic()
@@ -219,43 +239,24 @@ namespace PhoneApp1
         private void ShowUI()
         {
             // sliderStream.Visibility = Visibility.Visible;
+            btn_save.Visibility = Visibility.Visible;
             btn_back.Visibility = Visibility.Visible;
             tbl_Loading.Visibility = Visibility.Collapsed;
             tbl_anoun.Visibility = Visibility.Collapsed;
         }
 
-        private async void SetFileToPreView(string fileName)
-        {
-            media_preview.Stop();
-            //set source to null to play another video
-            media_preview.Source = null;
-            //   posTimer.Stop();
-            Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-            var sampleFile = await localFolder.GetFileAsync(fileName);
-            filePreview = null;
-            filePreview = sampleFile;
-            VideoPlayback();
-        }
-
-        private void GenerateUI()
-        {
-            if (GlobalSettings.isNewShow)
-            {
-                gr_VideoList.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                gr_VideoList.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void ShowSourceOfListBox()
-        {
-            ListBox1.ItemsSource = null;
-            ListBox1.ItemsSource = previewImageList;
-            Debug.WriteLine("imagelist number" + previewImageList.Count);
-            //ListBox1.ItemsSource = GlobalSettings.fileNameStore;
-        }
+        //private async void SetFileToPreView(string fileName)
+        //{
+        //    media_preview.Stop();
+        //    //set source to null to play another video
+        //    media_preview.Source = null;
+        //    //   posTimer.Stop();
+        //    Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+        //    var sampleFile = await localFolder.GetFileAsync(fileName);
+        //    filePreview = null;
+        //    filePreview = sampleFile;
+        //    VideoPlayback();
+        //}
 
         public static void AddThumbnailToPreviewVideo(Image img)
         {
@@ -275,77 +276,6 @@ namespace PhoneApp1
                 }
             }
 
-        }
-
-        public async void GetAllThumbnail()
-        {
-            previewImageList.Clear();
-            //   GlobalSettings.ReadThumbnail();
-            foreach (VideoProperty video in GlobalSettings.videoPropertyList)
-            {
-                StorageFile sampleFile = null;
-                Debug.WriteLine(video.thumbnail);
-                try
-                {
-                    Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                    sampleFile = await localFolder.GetFileAsync(video.thumbnail.ToString() + ".jpg");
-                    var bitmap = new BitmapImage();
-                    Image img = new Image();
-                    bitmap.UriSource = new Uri(sampleFile.Path);
-                    img.Source = bitmap;
-                    previewImageList.Add(img);
-                    Debug.WriteLine("file exist");
-                }
-                catch (FileNotFoundException)
-                {
-                    //  isFileExist = false;
-                    Debug.WriteLine("File not exist");
-
-                }
-            }
-            ShowSourceOfListBox();
-            Debug.WriteLine("imagelist number after get thumbnail" + previewImageList.Count);
-        }
-
-        private void SetPropertiesForVideo()
-        {
-        }
-
-        void SelectionVideoHandle(object sender, SelectionChangedEventArgs args)
-        {
-            // Debug.WriteLine("select");
-            // ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
-            var lb = sender as ListBox;
-            Debug.WriteLine("index selected:" + lb.SelectedIndex);
-            if (lb.SelectedIndex >= 0)
-            {
-                selectIndex = lb.SelectedIndex;
-                Debug.WriteLine(GlobalSettings.fileNameStore[selectIndex]);
-                SetFileToPreView(GlobalSettings.fileNameStore[selectIndex]);
-                Preview.selectedShow = selectIndex;
-                //if (GlobalSettings.videoPropertyList[selectedShow].saveFilePath == "")
-                //{
-                //    btn_save.Visibility = Visibility.Visible;
-                //    btn_share.Visibility = Visibility.Collapsed;
-                //}
-                //else
-                //{
-                //    btn_save.Visibility = Visibility.Collapsed;
-                //    btn_share.Visibility = Visibility.Visible;
-                //}
-            }
-
-        }
-
-
-
-        private void btn_show_Click(object sender, RoutedEventArgs e)
-        {
-            gr_VideoList.Visibility = Visibility.Visible;
-            GetAllThumbnail();
-         //   GlobalSettings.ReadThumbnail();
-            // ShowSourceOfListBox();
-            Storyboard_show.Begin();
         }
 
         private void btn_save_Click(object sender, RoutedEventArgs e)

@@ -40,7 +40,6 @@ namespace PhoneApp1
 
         public async void ContinueMusicFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {
-            Debug.WriteLine("Pick music");
             if (
                  args.Files != null &&
                args.Files.Count > 0)

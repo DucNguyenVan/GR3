@@ -128,6 +128,9 @@
     </Compile>
     <Compile Include="VideoClipViewModel.cs" />
     <Compile Include="VideoProperty.cs" />
+    <Compile Include="WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -158,6 +161,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WelcomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -180,6 +187,7 @@
     <Content Include="Assets\ApplicationIcon.png" />
     <Content Include="Assets\BadgeLogo.png" />
     <Content Include="Assets\Command-Undo.png" />
+    <Content Include="Assets\Data-Edit.png" />
     <Content Include="Assets\Film Role.png" />
     <Content Include="Assets\Format-Bullets-02.png" />
     <Content Include="Assets\Media Previous.png" />

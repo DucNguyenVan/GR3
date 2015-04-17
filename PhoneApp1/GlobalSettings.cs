@@ -200,6 +200,11 @@ namespace PhoneApp1
             GlobalSettings.compositionList.Add(comp);
         }
 
+        public static void ChangeValueOfCompositionAt(Composition newComp, int i)
+        {
+            GlobalSettings.compositionList[i] = newComp;
+        }
+
         public static void AddVideoPropertyToList(VideoProperty item)
         {
             GlobalSettings.videoPropertyList.Add(item);

@@ -32,7 +32,7 @@ namespace PhoneApp1
             tbl_Loading.Visibility = Visibility.Visible;
             mediaComposition = new MediaComposition();
           //  CheckValidateOfMediaCompotion();
-            SetMediaComposition(Preview.selectedShow);
+            SetMediaComposition(WelcomePage.currentSelectedIndex);
             List<string> source = new List<string>();
             source.Add("HD1080");
             source.Add("HD720");
@@ -122,7 +122,7 @@ namespace PhoneApp1
            // btn_Save.Visibility = Visibility.Visible;
             tbl_success.Visibility = Visibility.Visible;
             tbl_Loading.Visibility = Visibility.Collapsed;
-            GlobalSettings.videoPropertyList[Preview.selectedShow].saveFilePath = videoStorageFile.Path;
+            GlobalSettings.videoPropertyList[WelcomePage.currentSelectedIndex].saveFilePath = videoStorageFile.Path;
             GlobalSettings.WriteThumbnail();
             GlobalSettings.isSaved = true;
         }

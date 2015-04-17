@@ -152,9 +152,9 @@ namespace PhoneApp1
          //   var uploadFile = SaveVideo.videoStorageFile;
 //            uploadFile = Preview.filePreview;
             //using (var fileStream = new FileStream(uploadFile.Path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-            StorageFile file = await StorageFile.GetFileFromPathAsync(GlobalSettings.videoPropertyList[Preview.selectedShow].saveFilePath);
-            Debug.WriteLine("preview selected:"+Preview.selectedShow);
-            Debug.WriteLine("save path" + GlobalSettings.videoPropertyList[Preview.selectedShow].saveFilePath);
+            StorageFile file = await StorageFile.GetFileFromPathAsync(GlobalSettings.videoPropertyList[WelcomePage.currentSelectedIndex].saveFilePath);
+            Debug.WriteLine("preview selected:" + WelcomePage.currentSelectedIndex);
+            Debug.WriteLine("save path" + GlobalSettings.videoPropertyList[WelcomePage.currentSelectedIndex].saveFilePath);
             using (var fileStream = new FileStream(file.Path, FileMode.Open,FileAccess.ReadWrite,FileShare.ReadWrite))
             {
                 tbl_loadingPercent.Visibility = Visibility.Visible;

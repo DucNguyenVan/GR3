@@ -67,13 +67,14 @@ namespace PhoneApp1
             public bool isFrame;
             public int time;
         };
-        public static List<MyVideo> videoList = new List<MyVideo>();
+        public static List<MyVideo> videoList;
         private VideoState currentState;
         public static PageName pageName;
-        private IEnumerable<string> supportedFileTypes = new List<string> { ".mp4",".jpg" };
+        private IEnumerable<string> supportedFileTypes = new List<string> { ".mp4", ".jpg" };
         private IEnumerable<string> supportedMusicFileTypes = new List<string> { ".mp3" };
         private readonly VideoClips videoClips;
-        public static List<Image> imageList = new List<Image>();
+        //public static List<Image> imageList = new List<Image>();
+        public static List<Image> imageList;
         List<StorageFile> storageFileList = new List<StorageFile>();
         int currentSelectedIndex = 0;
         // Constructor
@@ -82,7 +83,8 @@ namespace PhoneApp1
             InitializeComponent();
             this.InitializeComponent();
             gr_swap.Visibility = Visibility.Collapsed;
-            GlobalSettings.ReadState();
+            imageList = new List<Image>();
+            //GlobalSettings.ReadState();
             //read da bao gom ca addToList
             GlobalSettings.ReadThumbnail();
             GlobalSettings.ReadClipName();
@@ -94,6 +96,12 @@ namespace PhoneApp1
             //BuildLocalizedApplicationBar();
             //  IsolatedStorageFile
             videoClips = new VideoClips();
+            videoList = new List<MyVideo>();
+            if (WelcomePage.isEdit)
+            {
+                GlobalSettings.isNewShow = false;
+                SetMediaComposition(WelcomePage.currentSelectedIndex);
+            }
             DataContext = videoClips;
 
         }
@@ -121,11 +129,12 @@ namespace PhoneApp1
             {
                 this.ContinueFileOpenPicker(app.FilePickerContinuationArgs);
             }
-            //after add new frame, re-show listbox
-            //TEST
-            // ShowSelectedComposition(Preview.selectedShow);
-            ListBox1.ItemsSource = null;
-            ListBox1.ItemsSource = imageList;
+            //after add new FRAME, re-show listbox
+            if (pageName == PageName.FramePage)
+            {
+                ListBox1.ItemsSource = null;
+                ListBox1.ItemsSource = imageList;
+            }
 
         }
 
@@ -151,7 +160,7 @@ namespace PhoneApp1
         private void btn_Save_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             //ReArrange Video in VideoList
-            ArrangeVideoToComposition(false);
+           // ArrangeVideoToComposition();
             NavigationService.Navigate(new Uri("/SaveVideo.xaml", UriKind.RelativeOrAbsolute));
         }
 
@@ -164,10 +173,10 @@ namespace PhoneApp1
                 foreach (StorageFile file in args.Files)
                 {
                     fileUpload = file;
-                   // ProcessFile(file);
+                    // ProcessFile(file);
                     if (file.FileType != ".mp4")
                     {
-                       // ProcessFileAsImage(file);
+                        // ProcessFileAsImage(file);
                         clip = await MediaClip.CreateFromImageFileAsync(file, TimeSpan.FromSeconds(TIME_PER_IMAGE));
                         mediaComposition.Clips.Add(clip);
                         // Create thumbnail
@@ -180,7 +189,7 @@ namespace PhoneApp1
                     }
                     else
                     {
-                     //   ProcessFileAsVideo(file);
+                        //   ProcessFileAsVideo(file);
                         clip = await MediaClip.CreateFromFileAsync(file);
                         mediaComposition.Clips.Add(clip);
                         // Create thumbnail
@@ -204,35 +213,10 @@ namespace PhoneApp1
                         AddMoreImageToList(img);
                         AddVideoToList(file, img);
                     }
-                    //Debug.WriteLine(fileUpload.Path);
-                    //clip = await MediaClip.CreateFromFileAsync(fileUpload);
-                    //mediaComposition.Clips.Add(clip);
-                    //// Create thumbnail
-                    //var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView);
-                    //Stream stream = thumbnail.AsStream();
-                    //var image = new BitmapImage();
-                    //Image img = new Image();
-                    //img.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                    ////image.SetSource(thumbnail);
-                    //image.SetSource(stream);
-                    //Thickness margin = img.Margin;
-                    //margin.Left = 4;
-                    //margin.Right = 4;
-                    //margin.Top = 4;
-                    //margin.Bottom = 4;
-                    //img.Margin = margin;
-                    //img.Source = image;
-                    //// stackPanelContainer.Children.Add(img);
 
-                    //// Add to our viewmodel
-                    //videoClips.Add(new VideoClip(clip, image, file.Name));
-                    //AddMoreFileToList(file);
-                    //AddMoreImageToList(img);
-                    //AddVideoToList(file, img);
                 }
                 ListBox1.ItemsSource = null;
                 ListBox1.ItemsSource = imageList;
-                Debug.WriteLine("show item listbox");
             }
         }
 
@@ -274,7 +258,7 @@ namespace PhoneApp1
 
         private async void ProcessFileAsImage(StorageFile file)
         {
-            clip = await MediaClip.CreateFromImageFileAsync(file,TimeSpan.FromSeconds(TIME_PER_IMAGE));
+            clip = await MediaClip.CreateFromImageFileAsync(file, TimeSpan.FromSeconds(TIME_PER_IMAGE));
             mediaComposition.Clips.Add(clip);
             // Create thumbnail
             var bitmap = new BitmapImage();
@@ -282,7 +266,7 @@ namespace PhoneApp1
             bitmap.UriSource = new Uri(file.Path);
             img.Source = bitmap;
             AddMoreImageToList(img);
-            AddVideoToList(file, img,true,TIME_PER_IMAGE);
+            AddVideoToList(file, img, true, TIME_PER_IMAGE);
         }
 
         private void btn_Upload_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -307,7 +291,6 @@ namespace PhoneApp1
             myVideo.file = file;
             myVideo.image = image;
             videoList.Add(myVideo);
-            Debug.WriteLine("video list false:" + videoList.Count);
         }
 
         public static void AddVideoToList(StorageFile file, Image image, bool isFrame, int time)
@@ -318,7 +301,6 @@ namespace PhoneApp1
             myVideo.isFrame = isFrame;
             myVideo.time = time;
             videoList.Add(myVideo);
-            Debug.WriteLine("video list true:" + videoList.Count);
         }
 
         void SelectionThumbnailHandle(object sender, SelectionChangedEventArgs args)
@@ -363,7 +345,7 @@ namespace PhoneApp1
             shareMediaTask.Show();
         }
 
-        private async void ArrangeVideoToComposition(bool isNewShow)
+        private async void ArrangeVideoToComposition()
         {
             mediaComposition.Clips.Clear();
             //save composition
@@ -387,11 +369,79 @@ namespace PhoneApp1
                 comp.clipNameList.Add(tempClip);
             }
             comp.lenght = MainPage.mediaComposition.Clips.Count;
-            comp.id = GlobalSettings.fileNameStore.Count + 1;
-            if (isNewShow)
+            if (WelcomePage.isEdit)
             {
+                Debug.WriteLine("Arrange edit");
+                comp.id = WelcomePage.currentSelectedIndex + 1;
+                GlobalSettings.ChangeValueOfCompositionAt(comp, WelcomePage.currentSelectedIndex);
+                GlobalSettings.WriteClipName();
+            }
+            else
+            {
+                Debug.WriteLine("Arrange new");
+                comp.id = GlobalSettings.videoPropertyList.Count + 1;
                 GlobalSettings.AddCompositionToList(comp);
                 GlobalSettings.WriteClipName();
+            }
+        }
+
+        private void ShowSelectedComposition(int index)
+        {
+
+        }
+
+        private async void SetMediaComposition(int index)
+        {
+            foreach (ClipFileType clipName in GlobalSettings.compositionList[index].clipNameList)
+            {
+                //dame: PicturesLibrary, VideosLibrary, SavedPictures
+                try
+                {
+                    StorageFile file = await StorageFile.GetFileFromPathAsync(clipName.clipPath);
+                    MediaClip clip;
+                    Debug.WriteLine("File type:" + file.FileType + file.Name);
+                    if (file.FileType != ".mp4" && clipName.time > 0)
+                    {
+                        // Debug.WriteLine("add frame to video" + video.time);
+                        clip = await MediaClip.CreateFromImageFileAsync(file, System.TimeSpan.FromSeconds(clipName.time));
+                        var bitmap = new BitmapImage();
+                        Image img = new Image();
+                        bitmap.UriSource = new Uri(file.Path);
+                        img.Source = bitmap;
+                        AddMoreImageToList(img);
+                        AddVideoToList(file, img, true, TIME_PER_IMAGE);
+                    }
+                    else
+                    {
+                        clip = await MediaClip.CreateFromFileAsync(file);
+                        var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView);
+                        Stream stream = thumbnail.AsStream();
+                        var image = new BitmapImage();
+                        Image img = new Image();
+                        img.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                        //image.SetSource(thumbnail);
+                        image.SetSource(stream);
+                        Thickness margin = img.Margin;
+                        margin.Left = 4;
+                        margin.Right = 4;
+                        margin.Top = 4;
+                        margin.Bottom = 4;
+                        img.Margin = margin;
+                        img.Source = image;
+                        // Add to our viewmodel
+                        videoClips.Add(new VideoClip(clip, image, file.Name));
+                        AddMoreFileToList(file);
+                        AddMoreImageToList(img);
+                        AddVideoToList(file, img);
+                    }
+                    mediaComposition.Clips.Add(clip);
+                }
+                catch (FileNotFoundException)
+                {
+                    Debug.WriteLine("clip not found");
+                }
+                ListBox1.ItemsSource = null;
+                ListBox1.ItemsSource = imageList;
             }
         }
 
@@ -413,9 +463,7 @@ namespace PhoneApp1
             // vi vay phai clear 1 listbox roi gan vao listbox khac
             ListBox1.ItemsSource = null;
             if (mediaComposition.Clips.Count != 0)
-                ArrangeVideoToComposition(true);
-            else
-                ArrangeVideoToComposition(false);
+                ArrangeVideoToComposition();
             NavigationService.Navigate(new Uri("/Preview.xaml", UriKind.RelativeOrAbsolute));
         }
 
@@ -453,7 +501,7 @@ namespace PhoneApp1
             GlobalSettings.isNewShow = true;
             ListBox1.ItemsSource = null;
             pageName = MainPage.PageName.MainPage;
-            mediaComposition.Clips.Clear();
+           // mediaComposition.Clips.Clear();
             imageList.Clear();
             videoList.Clear();
         }
@@ -461,6 +509,15 @@ namespace PhoneApp1
         private void btn_frame_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Frame.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void btn_back_Click(object sender, RoutedEventArgs e)
+        {
+            //if (this.NavigationService.CanGoBack)
+            //{
+            //    this.NavigationService.GoBack();
+            //}
+            NavigationService.Navigate(new Uri("/WelcomePage.xaml", UriKind.RelativeOrAbsolute));
         }
 
 

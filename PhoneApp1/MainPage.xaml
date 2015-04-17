@@ -18,7 +18,7 @@
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="BorderThickness" Value="0"/>
 			<Setter Property="BorderBrush" Value="Transparent"/>
-			<Setter Property="Padding" Value="0"/>
+			<Setter Property="Padding" Value="30,30,30,30"/>
 			<Setter Property="HorizontalContentAlignment" Value="Left"/>
 			<Setter Property="VerticalContentAlignment" Value="Top"/>
 			<Setter Property="Template">
@@ -58,7 +58,7 @@
                                     </VisualState>
 								</VisualStateGroup>
 							</VisualStateManager.VisualStateGroups>
-                            <StackPanel>
+                            <StackPanel Margin="2,16,2,2">
                                 <!--<Rectangle x:Name="Top" Fill="Aquamarine" Height="20" Width="100"/>-->
                                 <!--<ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>-->
                                 <StackPanel x:Name="Panel" Orientation="Horizontal" Background="Black">
@@ -162,9 +162,14 @@
 					<ImageBrush Stretch="Fill" ImageSource="/Assets/Picture-Frame.png"/>
 				</Button.Background>
 			</Button>
-			<Button x:Name="btn_preview" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80" Margin="630,10,0,0" Click="btn_preview_Click" BorderThickness="0">
+			<Button x:Name="btn_preview" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80" Margin="339,10,0,0" Click="btn_preview_Click" BorderThickness="0">
 				<Button.Background>
 					<ImageBrush Stretch="Fill" ImageSource="/Assets/Film Role.png"/>
+				</Button.Background>
+			</Button>
+			<Button x:Name="btn_back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="640,10,0,0" BorderThickness="0" Width="80" Height="80" Click="btn_back_Click">
+				<Button.Background>
+					<ImageBrush Stretch="Fill" ImageSource="/Assets/Command-Undo.png"/>
 				</Button.Background>
 			</Button>
 		</Grid>
@@ -203,7 +208,7 @@
             	</Button.Background>
             </Button>
 		</Grid>
-		<Button x:Name="btn_newVideo" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Grid.RowSpan="2" Click="btn_newVideo_Click" Width="80" Height="80" BorderThickness="0">
+		<Button x:Name="btn_newVideo" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Grid.RowSpan="2" Click="btn_newVideo_Click" Width="80" Height="80" BorderThickness="0" Visibility="Collapsed">
 			<Button.Background>
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/Movie Add.png"/>
 			</Button.Background>

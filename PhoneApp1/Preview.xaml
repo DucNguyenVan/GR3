@@ -13,16 +13,7 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="False">
 	<phone:PhoneApplicationPage.Resources>
-		<Storyboard x:Name="Storyboard_show">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="gr_VideoList">
-				<EasingDoubleKeyFrame KeyTime="0" Value="242"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="2"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="gr_VideoList">
-				<EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-8"/>
-			</DoubleAnimationUsingKeyFrames>
-		</Storyboard>
+		<Storyboard x:Name="Storyboard_show"/>
 	</phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -35,16 +26,16 @@
         <!--TitlePanel contains the name of the application and page title-->
 
         <!--ContentPanel - place additional content here-->
-        <MediaElement x:Name="media_preview" Height="316" Grid.RowSpan="2" Width="549" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" MediaOpened="OnMediaOpened"/>
+        <MediaElement x:Name="media_preview" Height="316" Grid.RowSpan="2" Width="549" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" MediaOpened="OnMediaOpened"/>
         <Slider 
             x:Name="sliderStream" 
-            HorizontalAlignment="Left" 
+            HorizontalAlignment="Center" 
             VerticalAlignment="Top" 
             Width="528"
             Margin="10,426,0,-30"
             ValueChanged="sliderStream_ValueChanged" Grid.Row="1"/>
-        <TextBlock x:Name="tbl_Loading" TextWrapping="Wrap" Margin="110,236,0,0" Grid.Row="1" Width="320" Height="95" FontSize="32" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock x:Name="tbl_anoun" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,94,0,0" Grid.Row="1" Width="482" Height="67" FontSize="24" Text="If you cancel this task, it will be rollback." TextAlignment="Center"/>
+        <TextBlock x:Name="tbl_Loading" TextWrapping="Wrap" Margin="239,234,241,0" Grid.Row="1" Width="320" Height="95" FontSize="32" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="tbl_anoun" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,94,0,0" Grid.Row="1" Width="482" Height="67" FontSize="24" Text="If you cancel this task, it will be rollback." TextAlignment="Center"/>
         <Grid x:Name="gr_check" HorizontalAlignment="Left" Height="480" Grid.RowSpan="2" VerticalAlignment="Top" Width="800" Margin="0" Visibility="Collapsed">
         	<Grid.Background>
         		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -54,7 +45,7 @@
         	</Grid.Background>
         	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please select video files" VerticalAlignment="Top" Margin="226,186,0,0" Height="78" Width="358" TextAlignment="Center" FontSize="32"/>
         </Grid>
-        <Button x:Name="btn_back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="687,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_back_Click" BorderThickness="0">
+        <Button x:Name="btn_back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="687,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_back_Click" BorderThickness="0" Visibility="Collapsed">
         	<Button.Background>
         		<ImageBrush Stretch="Fill" ImageSource="/Assets/Command-Undo.png"/>
         	</Button.Background>
@@ -62,33 +53,12 @@
         <StackPanel Grid.Row="1" Margin="2,0,10,348">
         	<TextBlock Text="Preview" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
-        <Grid x:Name="gr_VideoList" HorizontalAlignment="Left" Height="346" Grid.RowSpan="2" VerticalAlignment="Top" Width="252" Margin="559,75,-11,0" RenderTransformOrigin="0.5,0.5">
-        	<Grid.RenderTransform>
-        		<CompositeTransform/>
-        	</Grid.RenderTransform>
-        	<ListBox x:Name="ListBox1" SelectionChanged="SelectionVideoHandle" Background="#FF252323" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,56,29,37" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="False" RenderTransformOrigin="0.5,0.5">
-        		<ListBox.Resources>
-        			<ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
-        				<StackPanel Orientation="Vertical"/>
-        			</ItemsPanelTemplate>
-        		</ListBox.Resources>
-        		<ListBox.ItemsPanel>
-        			<StaticResource ResourceKey="ItemsPanelTemplate1"/>
-        		</ListBox.ItemsPanel>
-        	</ListBox>
-        	<TextBlock x:Name="tbl_video" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Video's List" VerticalAlignment="Top" FontSize="26.667" Margin="50,16,0,0" Width="142"/>
-        </Grid>
-        <Button x:Name="btn_save" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="600,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_save_Click">
+        <Button x:Name="btn_save" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_save_Click" BorderThickness="0">
         	<Button.Background>
         		<ImageBrush Stretch="Fill" ImageSource="/Assets/Save.png"/>
         	</Button.Background>
         </Button>
-        <Button x:Name="btn_show" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="720,10,0,0" Grid.Row="1" Width="80" Height="75" Click="btn_show_Click" BorderThickness="0">
-        	<Button.Background>
-        		<ImageBrush ImageSource="/Assets/Format-Bullets-02.png" Stretch="Fill"/>
-        	</Button.Background>
-        </Button>
-        <Button x:Name="btn_share" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="600,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_share_Click" BorderThickness="0">
+        <Button x:Name="btn_share" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="600,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_share_Click" BorderThickness="0" Visibility="Collapsed">
         	<Button.Background>
         		<ImageBrush Stretch="Fill" ImageSource="/Assets/youtube.png"/>
         	</Button.Background>
