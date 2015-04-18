@@ -31,6 +31,7 @@ namespace PhoneApp1
         private int selectIndex;
         bool isStream;
         public static List<Image> previewImageList = new List<Image>();
+        string defaultName = "FMovie";
         public Preview()
         {
             InitializeComponent();
@@ -38,6 +39,7 @@ namespace PhoneApp1
             sliderStream.Visibility = Visibility.Collapsed;
             btn_save.Visibility = Visibility.Collapsed;
             btn_share.Visibility = Visibility.Collapsed;
+            btn_replay.Visibility = Visibility.Collapsed;
             GenerateFileV3();
          //   GenerateVideoForPreview();
         }
@@ -90,6 +92,11 @@ namespace PhoneApp1
             };
             posTimer.Start();
             // this.textBlock1.Text = msg;
+        }
+
+        private void OnMediaEnded(object sender, RoutedEventArgs e)
+        {
+            btn_replay.Visibility = Visibility.Visible;
         }
 
         private async void VideoPlayback()
@@ -243,6 +250,7 @@ namespace PhoneApp1
             btn_back.Visibility = Visibility.Visible;
             tbl_Loading.Visibility = Visibility.Collapsed;
             tbl_anoun.Visibility = Visibility.Collapsed;
+            btn_replay.Visibility = Visibility.Collapsed;
         }
 
         //private async void SetFileToPreView(string fileName)
@@ -271,6 +279,7 @@ namespace PhoneApp1
                     wb.SaveJpeg(isfs, 800, 480, 0, 100);
                     VideoProperty tempVideo = new VideoProperty();
                     tempVideo.thumbnail = name.ToString();
+                    tempVideo.showName = "FMovie " + (WelcomePage.currentSelectedIndex + 1).ToString();
                     GlobalSettings.AddVideoPropertyToList(tempVideo);
                     GlobalSettings.WriteThumbnail();
                 }
@@ -290,6 +299,13 @@ namespace PhoneApp1
             media_preview.Stop();
             media_preview.Source = null;
             NavigationService.Navigate(new Uri("/Upload.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void btn_replay_Click(object sender, RoutedEventArgs e)
+        {
+            btn_replay.Visibility = Visibility.Collapsed;
+            media_preview.Position = TimeSpan.Zero;
+            media_preview.Play();
         }
 
     }

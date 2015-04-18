@@ -85,11 +85,12 @@ namespace PhoneApp1
                     while (r.Peek() >= 0)
                     {
                         string name = r.ReadLine();
-                        string[] content = new string[2];
+                        string[] content = new string[3];
                         content = name.Split(',');
                         VideoProperty tempVideo = new VideoProperty();
                         tempVideo.thumbnail = content[0];
-                        tempVideo.saveFilePath = content[1];
+                        tempVideo.showName = content[1];
+                        tempVideo.saveFilePath = content[2];
                         AddVideoPropertyToList(tempVideo);
                       //  AddThumbnailToList(content[0]);
                       //  AddFileNameToList(content[1]);
@@ -113,6 +114,7 @@ namespace PhoneApp1
                 {
                     //writer.WriteLine(name);
                     writer.Write(video.thumbnail);
+                    writer.Write("," + video.showName);
                     writer.Write("," + video.saveFilePath);
                     writer.WriteLine();
                 }

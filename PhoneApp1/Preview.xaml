@@ -26,7 +26,7 @@
         <!--TitlePanel contains the name of the application and page title-->
 
         <!--ContentPanel - place additional content here-->
-        <MediaElement x:Name="media_preview" Height="316" Grid.RowSpan="2" Width="549" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" MediaOpened="OnMediaOpened"/>
+        <MediaElement x:Name="media_preview" Height="316" Grid.RowSpan="2" Width="549" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" MediaOpened="OnMediaOpened" MediaEnded="OnMediaEnded"/>
         <Slider 
             x:Name="sliderStream" 
             HorizontalAlignment="Center" 
@@ -61,6 +61,11 @@
         <Button x:Name="btn_share" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="600,390,0,0" Grid.Row="1" Width="80" Height="80" Click="btn_share_Click" BorderThickness="0" Visibility="Collapsed">
         	<Button.Background>
         		<ImageBrush Stretch="Fill" ImageSource="/Assets/youtube.png"/>
+        	</Button.Background>
+        </Button>
+        <Button x:Name="btn_replay" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="330,200,320,151" Grid.Row="1" BorderThickness="0" Width="150" Height="129" Click="btn_replay_Click">
+        	<Button.Background>
+        		<ImageBrush Stretch="Fill" ImageSource="/Assets/Reload - 01.png"/>
         	</Button.Background>
         </Button>
     </Grid>

@@ -35,8 +35,10 @@
         			<ImageBrush Stretch="Fill"/>
         		</Button.Foreground>
         	</Button>
-        	<TextBlock x:Name="tbl_Loading" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="400,100,0,0" Height="70" Width="244" FontSize="26.667"/>
-        	<TextBlock x:Name="tbl_success" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="400,100,0,0" Height="70" Width="244" FontSize="26.667" Visibility="Collapsed" Text="Successful"/>
+        	<TextBlock x:Name="tbl_Loading" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="96,247,0,0" Height="70" Width="244" FontSize="26.667"/>
+        	<TextBlock x:Name="tbl_success" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="96,247,0,0" Height="70" Width="244" FontSize="26.667" Text="Successful" Visibility="Collapsed"/>
+        	<TextBlock x:Name="tbl_Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Video's name" VerticalAlignment="Top" Width="231" Margin="472,31,0,0" Height="61" FontSize="32"/>
+        	<TextBox x:Name="tbx_videoName" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" VerticalAlignment="Top" Width="316" Margin="450,84,0,0"/>
 
         </Grid>
         <Grid x:Name="gr_check" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="800" Grid.RowSpan="2" Visibility="Collapsed">

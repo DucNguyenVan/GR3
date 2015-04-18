@@ -10,6 +10,7 @@ namespace PhoneApp1
     {
         public string thumbnail;
         public string saveFilePath = "";
+        public string showName = "";
         public VideoProperty()
         {
 

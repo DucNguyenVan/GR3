@@ -18,6 +18,7 @@ namespace PhoneApp1
 {
     public partial class SaveVideo : PhoneApplicationPage
     {
+        string defaultName = "FMovie";
         MediaClip clip;
         public static StorageFile videoStorageFile;
         public StorageFile sampleFile;
@@ -30,6 +31,8 @@ namespace PhoneApp1
             MainPage.pageName = MainPage.PageName.SavePage;
             tbl_success.Visibility = Visibility.Collapsed;
             tbl_Loading.Visibility = Visibility.Visible;
+            int videoName = WelcomePage.currentSelectedIndex + 1;
+            tbx_videoName.Text = defaultName +" "+ videoName.ToString();
             mediaComposition = new MediaComposition();
           //  CheckValidateOfMediaCompotion();
             SetMediaComposition(WelcomePage.currentSelectedIndex);
@@ -103,7 +106,8 @@ namespace PhoneApp1
             int per;
             Debug.WriteLine("Save");
             btn_Save.Visibility = Visibility.Collapsed;
-            videoStorageFile = await KnownFolders.VideosLibrary.CreateFileAsync("editedVideo.mp4", CreationCollisionOption.GenerateUniqueName);
+           
+            videoStorageFile = await KnownFolders.VideosLibrary.CreateFileAsync(tbx_videoName.Text + ".mp4", CreationCollisionOption.GenerateUniqueName);
             var mediaEncodingProfile = SelectProfile(selectIndex);
             //if (GlobalSettings.isRemove)
             //    DisableCurrentMusic();
