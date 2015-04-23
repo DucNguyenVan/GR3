@@ -56,18 +56,18 @@ namespace PhoneApp1
         {
             //do khi tao frame dat ten trung voi ten cua thumbnail. nen get file bi loan ten file, lay ra anh k dung y muon
             // nen se doi ten file frame theo dinh dang
-            // [id's video + image's name] vd: video id 1:  1.1, 1.2, 1.3 m video id 2: 2.1, 2.2, 2.3 
+            // [id's video + image's name] vd: video id 1:  0.1, 0.2, 0.3 m video id 2: 1.1, 1.2, 1.3 
             int name = MainPage.imageList.Count + 1;
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
-                using (var isfs = new IsolatedStorageFileStream(WelcomePage.currentSelectedIndex +"." + name.ToString() + ".jpg", FileMode.OpenOrCreate, isf))
+                using (var isfs = new IsolatedStorageFileStream(MainPage.videoIndexSelected +"." + name.ToString() + ".jpg", FileMode.OpenOrCreate, isf))
                 {
                     StorageFile sampleFile = null;
                     frameCover.SaveJpeg(isfs, 800, 480, 0, 100);
                     try
                     {
                         Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                        sampleFile = await localFolder.GetFileAsync(WelcomePage.currentSelectedIndex + "." + name.ToString() + ".jpg");
+                        sampleFile = await localFolder.GetFileAsync(MainPage.videoIndexSelected + "." + name.ToString() + ".jpg");
                         var bitmap = new BitmapImage();
                         Image img = new Image();
                         bitmap.UriSource = new Uri(sampleFile.Path);

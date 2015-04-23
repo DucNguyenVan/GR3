@@ -42,6 +42,7 @@ namespace PhoneApp1
         const int TIME_PER_IMAGE = 3;
         MediaClip clip;
         public static MediaComposition mediaComposition;
+        public static int videoIndexSelected = 0;
       //  public StorageFile fileUpload;
      //   Stream videoStream;
     //    MediaTranscoder transcoder = new MediaTranscoder();
@@ -89,10 +90,14 @@ namespace PhoneApp1
             //  IsolatedStorageFile
             videoClips = new VideoClips();
             videoList = new List<MyVideo>();
+            //khoi tao la videoIndex = lastIndex cua videopropertylist
+            //sau do neu ktra la edit thi gan lai la index cua edit
+            videoIndexSelected = GlobalSettings.videoPropertyList.Count;
             if (WelcomePage.isEdit)
             {
                 GlobalSettings.isNewShow = false;
-                SetMediaComposition(WelcomePage.currentSelectedIndex);
+                videoIndexSelected = WelcomePage.currentSelectedIndex;
+                SetMediaComposition(MainPage.videoIndexSelected);
             }
             DataContext = videoClips;
 
@@ -352,8 +357,8 @@ namespace PhoneApp1
             if (WelcomePage.isEdit)
             {
                 Debug.WriteLine("Arrange edit");
-                comp.id = WelcomePage.currentSelectedIndex + 1;
-                GlobalSettings.ChangeValueOfCompositionAt(comp, WelcomePage.currentSelectedIndex);
+                comp.id = MainPage.videoIndexSelected + 1;
+                GlobalSettings.ChangeValueOfCompositionAt(comp, MainPage.videoIndexSelected);
                 GlobalSettings.WriteClipName();
             }
             else

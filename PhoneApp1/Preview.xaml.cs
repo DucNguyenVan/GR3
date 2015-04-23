@@ -179,6 +179,8 @@ namespace PhoneApp1
                 //GlobalSettings.AddFileNameToList(sampleFile.Name);
                 //GlobalSettings.WriteState();
                 AddThumbnailToPreviewVideo(MainPage.imageList[0]);
+                //trong t/h tao video moi roi save, thi phai gan index moi. Con trong t/h edit roi save, thi k gan index moi
+               // MainPage.videoIndexSelected = GlobalSettings.videoPropertyList.Count - 1;
             }
             else
             {

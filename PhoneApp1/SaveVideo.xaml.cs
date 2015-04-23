@@ -19,6 +19,7 @@ namespace PhoneApp1
     public partial class SaveVideo : PhoneApplicationPage
     {
         string defaultName = "FMovie";
+      //  public static int saveVideoIndex = 0;
         //MediaClip clip;
         public static StorageFile videoStorageFile;
       //  public StorageFile sampleFile;
@@ -31,11 +32,11 @@ namespace PhoneApp1
             MainPage.pageName = MainPage.PageName.SavePage;
             tbl_success.Visibility = Visibility.Collapsed;
             tbl_Loading.Visibility = Visibility.Visible;
-            int videoName = WelcomePage.currentSelectedIndex + 1;
+            int videoName = MainPage.videoIndexSelected + 1;
             tbx_videoName.Text = defaultName +" "+ videoName.ToString();
             mediaComposition = new MediaComposition();
           //  CheckValidateOfMediaCompotion();
-            SetMediaComposition(WelcomePage.currentSelectedIndex);
+            SetMediaComposition(MainPage.videoIndexSelected);
             List<string> source = new List<string>();
             source.Add("HD1080");
             source.Add("HD720");
@@ -126,7 +127,7 @@ namespace PhoneApp1
            // btn_Save.Visibility = Visibility.Visible;
             tbl_success.Visibility = Visibility.Visible;
             tbl_Loading.Visibility = Visibility.Collapsed;
-            GlobalSettings.videoPropertyList[WelcomePage.currentSelectedIndex].saveFilePath = videoStorageFile.Path;
+            GlobalSettings.videoPropertyList[MainPage.videoIndexSelected].saveFilePath = videoStorageFile.Path;
             GlobalSettings.WriteThumbnail();
             GlobalSettings.isSaved = true;
         }
