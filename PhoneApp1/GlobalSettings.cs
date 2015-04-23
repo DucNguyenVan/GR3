@@ -21,9 +21,9 @@ namespace PhoneApp1
         //    public List<string> clipNameList ; //clips of composition
         //    public int lenght; // number of clips
         //}
-        public static List<string> fileNameStore = new List<string>();
+      //  public static List<string> fileNameStore = new List<string>();
        // public static List<string> thumbnailList = new List<string>();
-        public static List<string> saveFileList = new List<string>();
+       // public static List<string> saveFileList = new List<string>();
         public static List<Composition> compositionList = new List<Composition>();
         public static List<VideoProperty> videoPropertyList = new List<VideoProperty>();
 
@@ -32,45 +32,45 @@ namespace PhoneApp1
 
         }
 
-        public static void ReadState()
-        {
-            IsolatedStorageFile s = IsolatedStorageFile.GetUserStoreForApplication();
-            if (s.FileExists("filename.txt"))
-            {
-                IsolatedStorageFileStream f = s.OpenFile("filename.txt", FileMode.Open,
-                    FileAccess.Read, FileShare.Read);
-                using (StreamReader r = new StreamReader(f))
-                {
-                    while (r.Peek() >= 0)
-                    {
-                        string name = r.ReadLine();
-                        AddFileNameToList(name);
-                    }
-                    r.Close();
-                    r.Dispose();
-                }
-                f.Close();
-                f.Dispose();
-            }
-            s.Dispose();
-        }
+        //public static void ReadState()
+        //{
+        //    IsolatedStorageFile s = IsolatedStorageFile.GetUserStoreForApplication();
+        //    if (s.FileExists("filename.txt"))
+        //    {
+        //        IsolatedStorageFileStream f = s.OpenFile("filename.txt", FileMode.Open,
+        //            FileAccess.Read, FileShare.Read);
+        //        using (StreamReader r = new StreamReader(f))
+        //        {
+        //            while (r.Peek() >= 0)
+        //            {
+        //                string name = r.ReadLine();
+        //                AddFileNameToList(name);
+        //            }
+        //            r.Close();
+        //            r.Dispose();
+        //        }
+        //        f.Close();
+        //        f.Dispose();
+        //    }
+        //    s.Dispose();
+        //}
 
-        public static void WriteState()
-        {
-            IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
-            using (var writer = new StreamWriter(
-                new IsolatedStorageFileStream("filename.txt", FileMode.Create, FileAccess.Write, storage)))
-            {
-                foreach (string name in fileNameStore)
-                {
-                    writer.WriteLine(name);
-                }
-                writer.Flush();
-                writer.Close();
-                writer.Dispose();
-            }
-            storage.Dispose();
-        }
+        //public static void WriteState()
+        //{
+        //    IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
+        //    using (var writer = new StreamWriter(
+        //        new IsolatedStorageFileStream("filename.txt", FileMode.Create, FileAccess.Write, storage)))
+        //    {
+        //        foreach (string name in fileNameStore)
+        //        {
+        //            writer.WriteLine(name);
+        //        }
+        //        writer.Flush();
+        //        writer.Close();
+        //        writer.Dispose();
+        //    }
+        //    storage.Dispose();
+        //}
 
         public static void ReadThumbnail()
         {
@@ -192,10 +192,10 @@ namespace PhoneApp1
         }
 
 
-        public static void AddFileNameToList(string name)
-        {
-            GlobalSettings.fileNameStore.Add(name);
-        }
+        //public static void AddFileNameToList(string name)
+        //{
+        //    GlobalSettings.fileNameStore.Add(name);
+        //}
 
         public static void AddCompositionToList(Composition comp)
         {

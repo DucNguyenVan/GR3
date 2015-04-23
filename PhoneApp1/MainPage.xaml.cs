@@ -41,21 +41,14 @@ namespace PhoneApp1
     {
         const int TIME_PER_IMAGE = 3;
         MediaClip clip;
-        DispatcherTimer posTimer;
         public static MediaComposition mediaComposition;
-        private bool isPlaying;
-        StorageFile sourceFile;
-        public StorageFile fileUpload;
-        Stream videoStream;
-        MediaTranscoder transcoder = new MediaTranscoder();
-        Windows.Storage.StorageFile _InputFile = null;
-        Windows.Storage.StorageFile _OutputFile = null;
-        public static IsolatedStorageFile isf;
-        public static IsolatedStorageFileStream isfs;
-        private enum VideoState
-        {
-            AllowEditing, Playing
-        }
+      //  public StorageFile fileUpload;
+     //   Stream videoStream;
+    //    MediaTranscoder transcoder = new MediaTranscoder();
+        //private enum VideoState
+        //{
+        //    AllowEditing, Playing
+        //}
         public enum PageName
         {
             MainPage, MusicPage, SavePage, UploadPage, PreviewPage, FramePage
@@ -68,14 +61,13 @@ namespace PhoneApp1
             public int time;
         };
         public static List<MyVideo> videoList;
-        private VideoState currentState;
         public static PageName pageName;
         private IEnumerable<string> supportedFileTypes = new List<string> { ".mp4", ".jpg" };
-        private IEnumerable<string> supportedMusicFileTypes = new List<string> { ".mp3" };
+       // private IEnumerable<string> supportedMusicFileTypes = new List<string> { ".mp3" };
         private readonly VideoClips videoClips;
         //public static List<Image> imageList = new List<Image>();
         public static List<Image> imageList;
-        List<StorageFile> storageFileList = new List<StorageFile>();
+     //   List<StorageFile> storageFileList = new List<StorageFile>();
         int currentSelectedIndex = 0;
         // Constructor
         public MainPage()
@@ -90,7 +82,7 @@ namespace PhoneApp1
             GlobalSettings.ReadClipName();
             //  this.NavigationCacheMode = NavigationCacheMode.Required;
             var app = Application.Current as App;
-            videoStream = new System.IO.MemoryStream();
+          //  videoStream = new System.IO.MemoryStream();
             mediaComposition = new MediaComposition();
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
@@ -157,13 +149,6 @@ namespace PhoneApp1
             NavigationService.Navigate(new Uri("/Music.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        private void btn_Save_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            //ReArrange Video in VideoList
-           // ArrangeVideoToComposition();
-            NavigationService.Navigate(new Uri("/SaveVideo.xaml", UriKind.RelativeOrAbsolute));
-        }
-
         public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {
             if (
@@ -172,7 +157,7 @@ namespace PhoneApp1
             {
                 foreach (StorageFile file in args.Files)
                 {
-                    fileUpload = file;
+                   // fileUpload = file;
                     // ProcessFile(file);
                     if (file.FileType != ".mp4")
                     {
@@ -209,7 +194,7 @@ namespace PhoneApp1
                         img.Source = image;
                         // Add to our viewmodel
                         videoClips.Add(new VideoClip(clip, image, file.Name));
-                        AddMoreFileToList(file);
+                        //AddMoreFileToList(file);
                         AddMoreImageToList(img);
                         AddVideoToList(file, img);
                     }
@@ -251,7 +236,7 @@ namespace PhoneApp1
             img.Source = image;
             // Add to our viewmodel
             videoClips.Add(new VideoClip(clip, image, file.Name));
-            AddMoreFileToList(file);
+          //  AddMoreFileToList(file);
             AddMoreImageToList(img);
             AddVideoToList(file, img);
         }
@@ -269,21 +254,16 @@ namespace PhoneApp1
             AddVideoToList(file, img, true, TIME_PER_IMAGE);
         }
 
-        private void btn_Upload_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Upload.xaml", UriKind.RelativeOrAbsolute));
-        }
-
         public static void AddMoreImageToList(Image img)
         {
             imageList.Add(img);
             //  Preview.previewImageList.Add(img);
         }
 
-        private void AddMoreFileToList(StorageFile file)
-        {
-            storageFileList.Add(file);
-        }
+        //private void AddMoreFileToList(StorageFile file)
+        //{
+        //    storageFileList.Add(file);
+        //}
 
         public static void AddVideoToList(StorageFile file, Image image)
         {
@@ -331,13 +311,13 @@ namespace PhoneApp1
             ListBox1.ItemsSource = imageList;
         }
 
-        private void btn_Read_Click(object sender, RoutedEventArgs e)
-        {
-            var shareFile = SaveVideo.videoStorageFile;
-            if (shareFile != null)
-                ShowShareMediaTask(shareFile.Path);
+        //private void btn_Read_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var shareFile = SaveVideo.videoStorageFile;
+        //    if (shareFile != null)
+        //        ShowShareMediaTask(shareFile.Path);
 
-        }
+        //}
         void ShowShareMediaTask(string path)
         {
             ShareMediaTask shareMediaTask = new ShareMediaTask();
@@ -430,7 +410,7 @@ namespace PhoneApp1
                         img.Source = image;
                         // Add to our viewmodel
                         videoClips.Add(new VideoClip(clip, image, file.Name));
-                        AddMoreFileToList(file);
+                       // AddMoreFileToList(file);
                         AddMoreImageToList(img);
                         AddVideoToList(file, img);
                     }

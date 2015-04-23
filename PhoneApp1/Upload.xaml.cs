@@ -25,7 +25,7 @@ namespace PhoneApp1
         int selectIndex = 0;
         long lenght = 0;
         string text;
-        StorageFile uploadFile;
+      //  StorageFile uploadFile;
         public Upload()
         {
             InitializeComponent();

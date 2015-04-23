@@ -24,12 +24,12 @@ namespace PhoneApp1
         TextBox textOfFrame = new TextBox();
         TranslateTransform pos;
         WriteableBitmap frameCover;
-        bool isCreateFrame;
+       // bool isCreateFrame;
         int time;
         public Frame()
         {
             InitializeComponent();
-            isCreateFrame = false;
+          //  isCreateFrame = false;
             MainPage.pageName = MainPage.PageName.FramePage;
             pos = new TranslateTransform();
             frameCover = new WriteableBitmap(wbWitdh, wbHeight);
@@ -109,7 +109,7 @@ namespace PhoneApp1
 
         private void CreateFrame()
         {
-            isCreateFrame = true;
+           // isCreateFrame = true;
             SetTextOfFrame();
             Render();
             SaveToStream();

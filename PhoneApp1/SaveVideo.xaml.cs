@@ -19,9 +19,9 @@ namespace PhoneApp1
     public partial class SaveVideo : PhoneApplicationPage
     {
         string defaultName = "FMovie";
-        MediaClip clip;
+        //MediaClip clip;
         public static StorageFile videoStorageFile;
-        public StorageFile sampleFile;
+      //  public StorageFile sampleFile;
         private CancellationTokenSource cts;
         MediaComposition mediaComposition;
         int selectIndex = 0;

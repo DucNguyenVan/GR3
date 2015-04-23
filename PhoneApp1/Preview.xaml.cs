@@ -28,10 +28,10 @@ namespace PhoneApp1
         public static StorageFile filePreview;
         public static int selectedShow = 0;
         string fileName;
-        private int selectIndex;
-        bool isStream;
+       // private int selectIndex;
+       // bool isStream;
         public static List<Image> previewImageList = new List<Image>();
-        string defaultName = "FMovie";
+      //  string defaultName = "FMovie";
         public Preview()
         {
             InitializeComponent();
@@ -74,7 +74,7 @@ namespace PhoneApp1
         private void OnMediaOpened(object sender, RoutedEventArgs e)
         {
             ShowUI();
-            isStream = true;
+          //  isStream = true;
             // Reinit pos slider
             sliderStream.Minimum = 0;
             sliderStream.Maximum = MainPage.mediaComposition.Duration.TotalSeconds;

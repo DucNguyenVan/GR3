@@ -137,21 +137,6 @@
 					<ImageBrush ImageSource="/Assets/Addition .png"/>
 				</Button.Background>
 			</Button>
-			<Button x:Name="btn_Upload" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="610,10,0,0" Click="btn_Upload_Click" Width="80" Height="80" Visibility="Collapsed">
-				<Button.Background>
-					<ImageBrush Stretch="Fill" ImageSource="/Assets/YouTube1.png"/>
-				</Button.Background>
-			</Button>
-			<Button x:Name="btn_Read" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="530,10,0,0" Width="80" Click="btn_Read_Click" Height="80" Visibility="Collapsed">
-				<Button.Background>
-					<ImageBrush Stretch="Fill" ImageSource="/Assets/share.png"/>
-				</Button.Background>
-			</Button>
-			<Button x:Name="btn_Save" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,10,0,0" Click="btn_Save_Click" Width="80" Height="80" Visibility="Collapsed">
-				<Button.Background>
-					<ImageBrush Stretch="Fill" ImageSource="/Assets/Save.png"/>
-				</Button.Background>
-			</Button>
 			<Button x:Name="btn_music" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95,10,0,0" Width="80" Height="80" Click="btn_music_Click" BorderThickness="0">
 				<Button.Background>
 					<ImageBrush Stretch="Fill" ImageSource="/Assets/addMusic.png"/>

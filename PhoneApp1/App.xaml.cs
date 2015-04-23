@@ -15,8 +15,8 @@ namespace PhoneApp1
 {
     public partial class App : Application
     {
-        public event Action<IReadOnlyList<StorageFile>> FilesOpenPicked;
-        public event Action<StorageFile> FileSavePicked;
+        //public event Action<IReadOnlyList<StorageFile>> FilesOpenPicked;
+        //public event Action<StorageFile> FileSavePicked;
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
