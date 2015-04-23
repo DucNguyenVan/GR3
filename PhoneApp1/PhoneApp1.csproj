@@ -100,6 +100,7 @@
       <DependentUpon>Frame.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalSettings.cs" />
+    <Compile Include="ListOfShow.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

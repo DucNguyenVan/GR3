@@ -279,7 +279,7 @@ namespace PhoneApp1
                     wb.SaveJpeg(isfs, 800, 480, 0, 100);
                     VideoProperty tempVideo = new VideoProperty();
                     tempVideo.thumbnail = name.ToString();
-                    tempVideo.showName = "FMovie " + (WelcomePage.currentSelectedIndex + 1).ToString();
+                    tempVideo.showName = "FMovie " + (GlobalSettings.videoPropertyList.Count + 1).ToString();
                     GlobalSettings.AddVideoPropertyToList(tempVideo);
                     GlobalSettings.WriteThumbnail();
                 }
