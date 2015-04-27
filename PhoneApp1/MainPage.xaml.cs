@@ -33,6 +33,7 @@ using Microsoft.Phone.Tasks;
 using System.Threading;
 using Windows.Storage.FileProperties;
 using System.Windows.Media.Imaging;
+using Microsoft.Phone.Info;
 
 
 namespace PhoneApp1
@@ -70,6 +71,7 @@ namespace PhoneApp1
         public static List<Image> imageList;
      //   List<StorageFile> storageFileList = new List<StorageFile>();
         int currentSelectedIndex = 0;
+        bool isLow;
         // Constructor
         public MainPage()
         {
@@ -100,7 +102,8 @@ namespace PhoneApp1
                 SetMediaComposition(MainPage.videoIndexSelected);
             }
             DataContext = videoClips;
-
+            isLow = IsLowMemDevice;
+            Debug.WriteLine("Low mem:" + isLow);
         }
 
         // Sample code for building a localized ApplicationBar
@@ -429,6 +432,29 @@ namespace PhoneApp1
                 ListBox1.ItemsSource = imageList;
             }
         }
+
+        public static bool IsLowMemDevice
+        {
+            get
+            {
+                if (!isLowMemDevice.HasValue)
+                {
+                    try
+                    {
+                        // check the working set limit 
+                        long result = (long)DeviceExtendedProperties.GetValue("ApplicationWorkingSetLimit");
+                        isLowMemDevice = result < 94371840L;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        // OS does not support this call => indicates a 512 MB device
+                        isLowMemDevice = false;
+                    }
+                }
+                return isLowMemDevice.Value;
+            }
+        }
+        private static bool? isLowMemDevice;
 
         private void ShowNavigationBar(bool isShow)
         {
