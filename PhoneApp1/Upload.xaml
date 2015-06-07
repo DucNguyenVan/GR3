@@ -49,7 +49,7 @@
 			</Grid.Background>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please save video first!" VerticalAlignment="Top" Margin="143,120,0,0" Width="534" Height="111" FontSize="26.667" TextAlignment="Center"/>
 		</Grid>
-		<Button x:Name="btn_back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="670,382,0,0" Click="btn_back_Click" Width="80" Height="80">
+		<Button x:Name="btn_back" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="670,382,0,0" Click="btn_back_Click" Width="80" Height="80" BorderThickness="0">
 			<Button.Background>
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/Command-Undo.png"/>
 			</Button.Background>

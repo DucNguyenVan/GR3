@@ -147,7 +147,7 @@
 					<ImageBrush Stretch="Fill" ImageSource="/Assets/Picture-Frame.png"/>
 				</Button.Background>
 			</Button>
-			<Button x:Name="btn_preview" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80" Margin="339,10,0,0" Click="btn_preview_Click" BorderThickness="0">
+			<Button x:Name="btn_preview" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80" Margin="463,10,0,0" Click="btn_preview_Click" BorderThickness="0">
 				<Button.Background>
 					<ImageBrush Stretch="Fill" ImageSource="/Assets/Film Role.png"/>
 				</Button.Background>

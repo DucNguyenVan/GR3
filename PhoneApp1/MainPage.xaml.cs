@@ -79,6 +79,8 @@ namespace PhoneApp1
             this.InitializeComponent();
             gr_swap.Visibility = Visibility.Collapsed;
             imageList = new List<Image>();
+
+            Debug.WriteLine(imageList.Count);
             //GlobalSettings.ReadState();
             //read da bao gom ca addToList
             GlobalSettings.ReadThumbnail();
@@ -92,18 +94,30 @@ namespace PhoneApp1
             //  IsolatedStorageFile
             videoClips = new VideoClips();
             videoList = new List<MyVideo>();
+            // mediaComposition.Clips.Clear();
+            imageList.Clear();
+            videoList.Clear();
             //khoi tao la videoIndex = lastIndex cua videopropertylist
             //sau do neu ktra la edit thi gan lai la index cua edit
             videoIndexSelected = GlobalSettings.videoPropertyList.Count;
             if (WelcomePage.isEdit)
             {
+                Debug.WriteLine("edit show check ");
                 GlobalSettings.isNewShow = false;
                 videoIndexSelected = WelcomePage.currentSelectedIndex;
                 SetMediaComposition(MainPage.videoIndexSelected);
             }
-            DataContext = videoClips;
+            else {
+                Debug.WriteLine("set null Listbox");
+                Debug.WriteLine(pageName);
+                ListBox1.ItemsSource = null;
+                ListBox1.ItemsSource = imageList;
+            }
+           // DataContext = videoClips;
             isLow = IsLowMemDevice;
             Debug.WriteLine("Low mem:" + isLow);
+            
+            
         }
 
         // Sample code for building a localized ApplicationBar
@@ -128,9 +142,10 @@ namespace PhoneApp1
             if (app.FilePickerContinuationArgs != null && pageName == PageName.MainPage)
             {
                 this.ContinueFileOpenPicker(app.FilePickerContinuationArgs);
+                app.FilePickerContinuationArgs = null; /*de tranh sau khi ra khoi trang thi quay lai no van goi cac ham trong if nay*/
             }
             //after add new FRAME, re-show listbox
-            if (pageName == PageName.FramePage)
+            if (pageName == PageName.FramePage || pageName == PageName.PreviewPage )/*page name == preview chua test can than*/
             {
                 ListBox1.ItemsSource = null;
                 ListBox1.ItemsSource = imageList;
@@ -210,6 +225,7 @@ namespace PhoneApp1
                 }
                 ListBox1.ItemsSource = null;
                 ListBox1.ItemsSource = imageList;
+                Debug.WriteLine("set source for listbox");
             }
         }
 
@@ -433,6 +449,8 @@ namespace PhoneApp1
             }
         }
 
+        private static bool? isLowMemDevice;
+
         public static bool IsLowMemDevice
         {
             get
@@ -454,7 +472,6 @@ namespace PhoneApp1
                 return isLowMemDevice.Value;
             }
         }
-        private static bool? isLowMemDevice;
 
         private void ShowNavigationBar(bool isShow)
         {
@@ -474,8 +491,10 @@ namespace PhoneApp1
             // vi vay phai clear 1 listbox roi gan vao listbox khac
             ListBox1.ItemsSource = null;
             if (mediaComposition.Clips.Count != 0)
+            {
                 ArrangeVideoToComposition();
-            NavigationService.Navigate(new Uri("/Preview.xaml", UriKind.RelativeOrAbsolute));
+                NavigationService.Navigate(new Uri("/Preview.xaml", UriKind.RelativeOrAbsolute));
+            }
         }
 
         private void btn_prew_Click(object sender, RoutedEventArgs e)
@@ -528,6 +547,8 @@ namespace PhoneApp1
             //{
             //    this.NavigationService.GoBack();
             //}
+            ListBox1.ItemsSource = null;
+            mediaComposition.Clips.Clear();
             NavigationService.Navigate(new Uri("/WelcomePage.xaml", UriKind.RelativeOrAbsolute));
         }
 
